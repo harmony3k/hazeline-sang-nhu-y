@@ -5,226 +5,281 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chọn một lá bài</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&display=swap" rel="stylesheet">
     <style>
     html, body {
-    height: 100%; /* Đảm bảo html và body chiếm toàn bộ chiều cao màn hình */
-    margin: 0;
-}
+        height: 100%; /* Đảm bảo html và body chiếm toàn bộ chiều cao màn hình */
+        margin: 0;
+    }
     body {
-    margin: 0;
-    background: #18332b;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    overflow-x: hidden; /* Ngăn cuộn ngang toàn trang */
-    overflow-y: hidden
-}
-.frame.corner.top-left {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30vh; /* chỉnh theo kích thước ảnh thật */
-  height: 30vh;
-  background-color: #18332b;
-  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-blend-mode: screen;
-  pointer-events: none; /* để không cản trở click vào nội dung chính */
-}
-
-.frame.corner.top-right {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
-  height: 30vh;
-  background-color: #18332b;
-  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-blend-mode: screen;
-  transform: scaleX(-1); /* lật ảnh để đối xứng với top-left */
-  pointer-events: none;
-}
-.frame.corner.bottom-left {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
-  height: 30vh;
-  background-color: #18332b;
-  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-blend-mode: screen;
-  transform: scaleY(-1); /* lật ảnh để đối xứng với top-left */
-  pointer-events: none;
-  
-}
-
-.frame.corner.bottom-right {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
-  height: 30vh;
-  background-color: #18332b;
-  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-blend-mode: screen;
-  transform: scaleX(-1) scaleY(-1);/* lật ảnh để đối xứng với top-left */
-  pointer-events: none;
-  
-}
-.container {
-    text-align: center;
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    box-sizing: border-box;
-     z-index: 2;
-}
-
-header h1 {
-    font-size: 3.6em;
-    font-family: "Lobster", sans-serif;
-    font-weight: 400;
-    margin-bottom: 10px;
-    color: #e7edad;
-   
-}
-
-header p {
-    font-size: 1.25em;
-    margin-bottom: 40px;
-    color: #e7edad;
-}
-
-.card-area {
-    position: relative;
-    height: 400px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-    margin-top: 50px;
-}
-
-.card {
-    width: 200px;
-    height: 344px;
-    position: absolute;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.6s, z-index 0.3s ease-out; /* z-index transition mượt hơn */
-    border-radius: 8px;
-}
-
-.card.flipped .card-inner {
-    transform: rotateY(180deg);
-}
-
-/* .card.selected không cần style đặc biệt ở đây, JS xử lý z-index */
-
-.card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    border-radius: 8px;
-}
-
-.card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 8px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-back.svg-back {
-    background-image: url("https://i.postimg.cc/QM0CpkHM/Screenshot-2025-06-03-184046.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.card-front {
-    transform: rotateY(180deg);
-    
-}
-
-.card-front img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 4px;
-}
-
-
-/* Tablet */
-@media (max-width: 1024px) and (min-width: 769px) {
-    .card-area {
-        height: 350px;
-    }
-    .card {
-        width: 100px;
-        height: 170px;
-    }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    header p {
-        font-size: 0.9em;
-        margin-bottom: 20px;
-    }
-    .card-area {
-        position: static;
-        height: auto;
-        perspective: none;
+        margin: 0;
+        background: #18332b;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        overflow-x: hidden; /* Ngăn cuộn ngang toàn trang */
+        overflow-y: hidden;
+    }
+    .frame.corner.top-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30vh; /* chỉnh theo kích thước ảnh thật */
+      height: 30vh;
+      background-color: #18332b;
+      background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-blend-mode: screen;
+      pointer-events: none; /* để không cản trở click vào nội dung chính */
+    }
+
+    .frame.corner.top-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
+      height: 30vh;
+      background-color: #18332b;
+      background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-blend-mode: screen;
+      transform: scaleX(-1); /* lật ảnh để đối xứng với top-left */
+      pointer-events: none;
+    }
+    .frame.corner.bottom-left {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
+      height: 30vh;
+      background-color: #18332b;
+      background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-blend-mode: screen;
+      transform: scaleY(-1); /* lật ảnh để đối xứng với top-left */
+      pointer-events: none;
+      
+    }
+
+    .frame.corner.bottom-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
+      height: 30vh;
+      background-color: #18332b;
+      background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-blend-mode: screen;
+      transform: scaleX(-1) scaleY(-1);/* lật ảnh để đối xứng với top-left */
+      pointer-events: none;
+      
+    }
+    .container {
+        text-align: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+        box-sizing: border-box;
+         z-index: 2;
+    }
+
+    header h1 {
+        font-size: 3.6em;
+        font-family: "Lobster", sans-serif;
+        font-weight: 400;
+        margin-bottom: 10px;
+        color: #e7edad;
+        
+    }
+
+    header p {
+        font-size: 1.25em;
+        margin-bottom: 40px;
+        color: #e7edad;
+    }
+
+    .card-area {
+        position: relative;
+        height: 400px;
+        width: 100%;
+        display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px 25px; /* Thêm padding để thẻ đầu và cuối không quá sát mép */
-        margin-top: 20px;
-        width: 100%;
-        box-sizing: border-box;
+        perspective: 1000px;
+        margin-top: 50px;
     }
 
     .card {
-        position: relative; /* Quan trọng để z-index hoạt động đúng với overlap */
-        transform: none !important;
-        flex-shrink: 0; /* Ngăn thẻ co lại */
-        transform-origin: center center !important; margin-right 0.3s ease-out; 
-        /* Xếp chồng thẻ: thẻ rộng 120px, chồng lên 70px */
-  
+        --card-translate-x: 0px;
+        --card-translate-y: 0px;
+        --card-rotate-z: 0deg;
+        --card-rotate-x: 0deg;
+
+        width: 200px;
+        height: 344px;
+        position: absolute;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transform: 
+            translateX(var(--card-translate-x)) 
+            translateY(var(--card-translate-y)) 
+            rotateZ(var(--card-rotate-z)) 
+            rotateX(var(--card-rotate-x));
+        transition: transform 0.6s ease-out, z-index 0.3s ease-out;
+        border-radius: 8px;
     }
-    .card:last-child {
-         margin-right: 0; /* Thẻ cuối cùng không cần margin âm */
+
+    .card:hover:not(.selected) {
+        transform: 
+            translateX(var(--card-translate-x)) 
+            translateY(calc(var(--card-translate-y) - 10px)) 
+            rotateZ(var(--card-rotate-z)) 
+            rotateX(var(--card-rotate-x))
+            scale(1.02); 
+        z-index: 50; 
     }
-}
+
+    .card.flipped .card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        border-radius: 8px;
+    }
+
+    .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 8px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-back.svg-back {
+        background-image: url("https://i.postimg.cc/QM0CpkHM/Screenshot-2025-06-03-184046.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .card-front {
+        transform: rotateY(180deg);
+    }
+
+    .card-front img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 1024px) and (min-width: 769px) {
+        .card-area {
+            height: 350px;
+        }
+        .card {
+            width: 100px;
+            height: 170px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        header p {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        .card-area {
+            position: static;
+            height: auto;
+            perspective: none;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 25px;
+            margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .card {
+            position: relative; 
+            transform: none !important; 
+            flex-shrink: 0; 
+            transform-origin: center center !important; 
+            --card-translate-x: 0px !important;
+            --card-translate-y: 0px !important;
+            --card-rotate-z: 0deg !important;
+            --card-rotate-x: 0deg !important;
+        }
+        .card:last-child {
+              margin-right: 0; 
+        }
+        .card:hover:not(.selected) {
+            transform: none !important;
+            z-index: auto !important;
+        }
+    }
+
+    /* Popup Styles */
+    #imagePopupOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000; /* Ensure it's above other content */
+        cursor: pointer; /* Indicates the overlay is clickable to close */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #imagePopupOverlay.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    #popupCardImage {
+        max-width: 280px; /* Slightly larger than desktop card width */
+        max-height: 85vh;
+        object-fit: contain;
+        border: 4px;
+        border-radius: 10px;
+        box-shadow: 0 0 25px rgba(255,255,255,0.3);
+        cursor: default; /* Prevent overlay cursor on image itself */
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+    }
+    #imagePopupOverlay.visible #popupCardImage {
+        transform: scale(1);
+    }
     </style>
 </head>
 <body>
-<div class="frame corner top-left"></div>
-<div class="frame corner top-right"></div>
+    <div class="frame corner top-left"></div>
+    <div class="frame corner top-right"></div>
     <div class="container">
         <header>
             <h1>Chọn một lá bài</h1>
@@ -232,308 +287,399 @@ header p {
         </header>
         
         <div class="card-area">
-            <!-- Các lá bài sẽ được tạo bởi JavaScript -->
-        </div>
+            </div>
     </div>
-<div class="frame corner bottom-left"></div>
-<div class="frame corner bottom-right"></div>
+    <div class="frame corner bottom-left"></div>
+    <div class="frame corner bottom-right"></div>
+
+    <!-- Popup HTML structure -->
+    <div id="imagePopupOverlay">
+        <img id="popupCardImage" src="" alt="Selected Card">
+    </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-    const cardArea = document.querySelector('.card-area');
-    const numCardsTotal = 12; // Tổng số thẻ
-    let highestZIndex = numCardsTotal * 1; // Khởi tạo z-index cao hơn để tránh xung đột ban đầu
+        const cardArea = document.querySelector('.card-area');
+        const numCardsTotal = 12; 
+        let highestZIndex = numCardsTotal * 1; 
 
-    const frontImagePaths = [
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(1).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(10).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(11).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(12).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(13).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(14).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(15).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(2).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(3).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(4).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(5).png",
-      "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(6).png",
-    "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(7).png",
-        "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(8).png",
-        "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(9).png",
-    ];
-  
-    const cardStates = [];
+        const frontImagePaths = [
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(1).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(10).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(11).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(12).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(13).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(14).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(15).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(2).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(3).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(4).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(5).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(6).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(7).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(8).png",
+          "https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/asset%20img/hzl-tarot%20(9).png",
+        ];
+        frontImagePaths.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+        const cardStates = [];
 
-    function createCards() {
-        cardArea.innerHTML = '';
-        cardStates.length = 0;
-        highestZIndex = numCardsTotal * 2; // Reset khi tạo lại thẻ
+        // Popup elements
+        const popupOverlay = document.getElementById('imagePopupOverlay');
+        const popupCardImage = document.getElementById('popupCardImage');
+        let activeCardStateForPopup = null;
 
-        for (let i = 0; i < numCardsTotal; i++) {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.dataset.index = i;
-
-            const cardInner = document.createElement('div');
-            cardInner.classList.add('card-inner');
-
-            const cardBack = document.createElement('div');
-            cardBack.classList.add('card-face', 'card-back', 'svg-back');
-
-            const cardFront = document.createElement('div');
-            cardFront.classList.add('card-face', 'card-front');
-            const img = document.createElement('img');
-            img.alt = "Mặt trước thẻ bài";
-            cardFront.appendChild(img);
-
-            cardInner.appendChild(cardBack);
-            cardInner.appendChild(cardFront);
-            card.appendChild(cardInner);
-            cardArea.appendChild(card);
-
-            cardStates.push({
-                element: card,
-                isFlipped: false,
-                originalZIndex: i, // Sẽ được cập nhật bởi layoutCards
-                currentFrontImage: null,
-                originalXOffset: 0 // Thêm để lưu vị trí X offset ban đầu của thẻ trong Flexbox
-            });
-
-            card.addEventListener('click', () => handleCardClick(i));
-        }
-        layoutCards();
-    }
-
-    function handleCardClick(clickedCardIndex) {
-        const clickedState = cardStates[clickedCardIndex];
-        const clickedCardElement = clickedState.element;
-        const isMobile = window.innerWidth <= 768;
-
-
-        // Kiểm tra xem thẻ được click có phải là thẻ đang được chọn hay không
-        const isCurrentlySelected = clickedCardElement.classList.contains('selected');
-
-        if (isCurrentlySelected) {
-            // --- Trường hợp 1: Click vào chính thẻ đang được chọn và lật ---
-            // Đóng thẻ này lại
-            clickedCardElement.classList.remove('flipped', 'selected');
-            clickedCardElement.style.zIndex = clickedState.originalZIndex;
-            clickedState.isFlipped = false;
-            if (isMobile) {
-                clickedCardElement.style.transform = ''; // Xóa transform để trở về vị trí flex
+        popupOverlay.addEventListener('click', (event) => {
+            if (event.target === popupOverlay) { // Only if overlay itself is clicked
+                hideImagePopup();
             }
-            // clickedState.currentFrontImage = null; // Tùy chọn: reset hình ảnh
-        } else {
-            // --- Trường hợp 2: Click vào một thẻ mới (chưa được chọn hoặc thẻ úp) ---
+        });
 
-            // Bước 1: Tìm và đóng bất kỳ thẻ nào đang được chọn trước đó
-            cardStates.forEach((state, index) => {
-                if (index !== clickedCardIndex && state.element.classList.contains('selected')) {
-                    state.element.classList.remove('flipped', 'selected');
-                    state.element.style.zIndex = state.originalZIndex;
-                    state.isFlipped = false;
-                    if (isMobile) {
-                        state.element.style.transform = ''; // Xóa transform của thẻ cũ
+        function createCards() {
+            cardArea.innerHTML = '';
+            cardStates.length = 0;
+            highestZIndex = numCardsTotal * 2; 
+
+            for (let i = 0; i < numCardsTotal; i++) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.index = i;
+
+                const cardInner = document.createElement('div');
+                cardInner.classList.add('card-inner');
+
+                const cardBack = document.createElement('div');
+                cardBack.classList.add('card-face', 'card-back', 'svg-back');
+
+                const cardFront = document.createElement('div');
+                cardFront.classList.add('card-face', 'card-front');
+                const img = document.createElement('img');
+                img.alt = "Mặt trước thẻ bài";
+                cardFront.appendChild(img);
+
+                cardInner.appendChild(cardBack);
+                cardInner.appendChild(cardFront);
+                card.appendChild(cardInner);
+                cardArea.appendChild(card);
+
+                cardStates.push({
+                    element: card,
+                    isFlipped: false,
+                    originalZIndex: i, 
+                    currentFrontImage: null,
+                    originalTranslateX: 0,
+                    originalTranslateY: 0,
+                    originalRotateZ: 0,
+                    originalRotateX: 0
+                });
+
+                card.addEventListener('click', () => handleCardClick(i));
+            }
+            layoutCards();
+        }
+
+        function showImagePopup(imageSrc, cardState) {
+            if (!imageSrc) return;
+            popupCardImage.src = imageSrc;
+            popupOverlay.classList.add('visible');
+            document.body.style.overflow = 'hidden'; 
+            activeCardStateForPopup = cardState;
+        }
+
+        function hideImagePopup() {
+            if (!popupOverlay.classList.contains('visible')) return;
+
+            popupOverlay.classList.remove('visible');
+            document.body.style.overflow = ''; 
+            // popupCardImage.src = ''; // Clear image, optional, as it's hidden
+
+            if (activeCardStateForPopup) {
+                const cardElement = activeCardStateForPopup.element;
+                const state = activeCardStateForPopup;
+
+                cardElement.classList.remove('flipped', 'selected');
+                cardElement.style.zIndex = state.originalZIndex;
+                state.isFlipped = false;
+                cardElement.style.transform = ''; // Reset direct transform
+
+                // Restore CSS variables to ensure it's in its correct fan position
+                cardElement.style.setProperty('--card-translate-x', `${state.originalTranslateX}px`);
+                cardElement.style.setProperty('--card-translate-y', `${state.originalTranslateY}px`);
+                cardElement.style.setProperty('--card-rotate-z', `${state.originalRotateZ}deg`);
+                cardElement.style.setProperty('--card-rotate-x', `${state.originalRotateX}deg`);
+                
+                activeCardStateForPopup = null;
+            }
+        }
+
+        function handleCardClick(clickedCardIndex) {
+            const clickedState = cardStates[clickedCardIndex];
+            const clickedCardElement = clickedState.element;
+            const isMobile = window.innerWidth <= 768;
+
+            // If popup is open, clicking any card (or the card itself) should first close the popup.
+            if (popupOverlay.classList.contains('visible')) {
+                const cardThatWasInPopup = activeCardStateForPopup ? activeCardStateForPopup.element : null;
+                hideImagePopup();
+                // If the click was on the card that was just in the popup, it's now reset. Stop further action.
+                if (cardThatWasInPopup === clickedCardElement) {
+                    return;
+                }
+                // If a different card was clicked, the popup is closed, proceed to handle new card click.
+            }
+            
+            let isCurrentlySelected = clickedCardElement.classList.contains('selected');
+
+
+            if (isCurrentlySelected) {
+                // Case 1: Click on the selected card again (to deselect it)
+                clickedCardElement.classList.remove('flipped', 'selected');
+                clickedCardElement.style.zIndex = clickedState.originalZIndex;
+                clickedState.isFlipped = false;
+                clickedCardElement.style.transform = ''; // Reset direct transform
+                
+                // Restore CSS variables (though they shouldn't have changed, good for safety)
+                clickedCardElement.style.setProperty('--card-translate-x', `${clickedState.originalTranslateX}px`);
+                clickedCardElement.style.setProperty('--card-translate-y', `${clickedState.originalTranslateY}px`);
+                clickedCardElement.style.setProperty('--card-rotate-z', `${clickedState.originalRotateZ}deg`);
+                clickedCardElement.style.setProperty('--card-rotate-x', `${clickedState.originalRotateX}deg`);
+                
+            } else {
+                // Case 2: Click on a new card (or an unflipped/unselected card)
+
+                // Close any other card that was previously selected
+                cardStates.forEach((state, index) => {
+                    if (index !== clickedCardIndex && state.element.classList.contains('selected')) {
+                        state.element.classList.remove('flipped', 'selected');
+                        state.element.style.zIndex = state.originalZIndex;
+                        state.isFlipped = false;
+                        state.element.style.transform = ''; // Reset direct transform
+                        state.element.style.setProperty('--card-translate-x', `${state.originalTranslateX}px`);
+                        state.element.style.setProperty('--card-translate-y', `${state.originalTranslateY}px`);
+                        state.element.style.setProperty('--card-rotate-z', `${state.originalRotateZ}deg`);
+                        state.element.style.setProperty('--card-rotate-x', `${state.originalRotateX}deg`);
                     }
-                    // state.currentFrontImage = null; // Tùy chọn
+                });
+
+                // Open/Flip the clicked card
+                if (!clickedState.isFlipped) {
+                    const randomImageIndex = Math.floor(Math.random() * frontImagePaths.length);
+                    clickedState.currentFrontImage = frontImagePaths[randomImageIndex];
+                    clickedCardElement.querySelector('.card-front img').src = clickedState.currentFrontImage;
+                    clickedCardElement.classList.add('flipped');
+                    clickedState.isFlipped = true;
+                }
+
+                clickedCardElement.classList.add('selected');
+                highestZIndex++;
+                clickedCardElement.style.zIndex = highestZIndex;
+
+                // Apply selection transform (original behavior)
+                if (isMobile) {
+                    clickedCardElement.style.setProperty('--card-translate-x', `0px`);
+                    clickedCardElement.style.setProperty('--card-translate-y', `0px`);
+                    clickedCardElement.style.setProperty('--card-rotate-z', `0deg`);
+                    clickedCardElement.style.setProperty('--card-rotate-x', `0deg`);
+                    clickedCardElement.style.transform = `scale(1.05)`; 
+                } else {
+                    clickedCardElement.style.setProperty('--card-translate-x', `${clickedState.originalTranslateX}px`);
+                    clickedCardElement.style.setProperty('--card-translate-y', `${clickedState.originalTranslateY}px`);
+                    clickedCardElement.style.setProperty('--card-rotate-z', `${clickedState.originalRotateZ}deg`);
+                    clickedCardElement.style.setProperty('--card-rotate-x', `${clickedState.originalRotateX}deg`);
+                    clickedCardElement.style.transform = `
+                        translateX(${clickedState.originalTranslateX}px)
+                        translateY(${clickedState.originalTranslateY - 20}px) 
+                        rotateZ(${clickedState.originalRotateZ}deg)
+                        rotateX(${clickedState.originalRotateX}deg)
+                        scale(1.1)
+                    `;
+                }
+                
+                // Show the image in a popup
+                showImagePopup(clickedState.currentFrontImage, clickedState);
+            }
+        }
+
+        function layoutCards() {
+            const cards = Array.from(cardArea.querySelectorAll('.card'));
+            const viewportWidth = window.innerWidth;
+            const numCardsActual = cards.length;
+
+            if (numCardsActual === 0) return;
+
+            const cardElementForSize = cards[0];
+            const cardComputedStyle = getComputedStyle(cardElementForSize);
+            const cardWidth = parseFloat(cardComputedStyle.width);
+
+            cards.forEach((card, i_dom) => {
+                const cardDatasetIndex = parseInt(card.dataset.index);
+                const state = cardStates[cardDatasetIndex];
+
+                card.style.setProperty('--card-translate-x', '0px');
+                card.style.setProperty('--card-translate-y', '0px');
+                card.style.setProperty('--card-rotate-z', '0deg');
+                card.style.setProperty('--card-rotate-x', '0deg');
+                card.style.position = 'relative'; 
+
+                if (viewportWidth <= 768) { 
+                    cardArea.style.display = 'flex'; 
+                    card.style.position = 'relative';
+
+                    const availableWidthForCards = cardArea.clientWidth; 
+                    const mobileVisualBuffer = 20; 
+                    const effectiveWidthForCardsLayout = availableWidthForCards - (mobileVisualBuffer * 2);
+
+                    let totalWidthOccupiedByCards = numCardsActual * cardWidth;
+                    let spacingOrOverlapPerCard = 0;
+
+                    if (totalWidthOccupiedByCards > effectiveWidthForCardsLayout) {
+                        const totalVisibleWidthRequired = effectiveWidthForCardsLayout;
+                        spacingOrOverlapPerCard = (totalVisibleWidthRequired - cardWidth) / (numCardsActual > 1 ? numCardsActual - 1 : 1);
+                        const minVisiblePart = 20; 
+                        if (spacingOrOverlapPerCard < minVisiblePart) {
+                            spacingOrOverlapPerCard = minVisiblePart;
+                        }
+
+                        const marginRightValue = spacingOrOverlapPerCard - cardWidth; 
+                        if (i_dom < numCardsActual - 1) { 
+                            card.style.marginRight = `${marginRightValue}px`;
+                        } else {
+                            card.style.marginRight = '0';
+                        }
+                    } else {
+                        const remainingSpace = effectiveWidthForCardsLayout - totalWidthOccupiedByCards;
+                        const spaceBetweenCards = (numCardsActual > 1 ? remainingSpace / (numCardsActual - 1) : 0);
+                        
+                        if (i_dom < numCardsActual - 1) {
+                            card.style.marginRight = `${spaceBetweenCards}px`;
+                        } else {
+                            card.style.marginRight = '0';
+                        }
+                    }
+                    
+                    state.originalZIndex = i_dom;
+
+                    if (card.classList.contains('selected')) {
+                        // Already handled by handleCardClick
+                    } else {
+                        card.style.zIndex = state.originalZIndex;
+                    }
+                    state.originalTranslateX = 0;
+                    state.originalTranslateY = 0;
+                    state.originalRotateZ = 0;
+                    state.originalRotateX = 0;
+
+                } else { 
+                    cardArea.style.display = 'flex'; 
+                    card.style.position = 'absolute'; 
+
+                    const isTablet = viewportWidth <= 1024;
+                    const totalFanAngle = isTablet ? 40 : 55;
+                    const cardHorizontalSpreadFactor = isTablet ? 0.33 : 0.30;
+                    const horizontalSpreadPx = cardWidth * cardHorizontalSpreadFactor;
+                    const fanBaseVerticalOffset = isTablet ? 5 : 10;
+                    const arcDepth = isTablet ? 15 : 25;
+                    const cardTiltX = -8;
+
+                    card.style.transformOrigin = 'center 85%';
+
+                    const anglePerCard = numCardsActual > 1 ? totalFanAngle / (numCardsActual - 1) : 0;
+                    const rotationZ = (i_dom - (numCardsActual - 1) / 2) * anglePerCard;
+                    const horizontalOffset = (i_dom - (numCardsActual - 1) / 2) * horizontalSpreadPx;
+
+                    const centerIndex = (numCardsActual - 1) / 2;
+                    let normalizedPosFactor = 0;
+                    if (numCardsActual > 1) {
+                        normalizedPosFactor = centerIndex !== 0 ? Math.abs(i_dom - centerIndex) / Math.abs(centerIndex) : 0; // Ensure positive for pow
+                    }
+
+                    const arcYComponent = arcDepth * Math.pow(normalizedPosFactor, 2);
+                    const finalTranslateY = fanBaseVerticalOffset + arcYComponent;
+
+                    state.originalTranslateX = horizontalOffset;
+                    state.originalTranslateY = finalTranslateY;
+                    state.originalRotateZ = rotationZ;
+                    state.originalRotateX = cardTiltX;
+
+                    card.style.setProperty('--card-translate-x', `${horizontalOffset}px`);
+                    card.style.setProperty('--card-translate-y', `${finalTranslateY}px`);
+                    card.style.setProperty('--card-rotate-z', `${rotationZ}deg`);
+                    card.style.setProperty('--card-rotate-x', `${cardTiltX}deg`);
+
+                    const distanceFromCenterVisual = Math.abs(i_dom - centerIndex);
+                    const zLayerInFan = numCardsActual - Math.ceil(distanceFromCenterVisual);
+                    state.originalZIndex = zLayerInFan;
+
+                    if (card.classList.contains('selected')) {
+                        // z-index handled by handleCardClick
+                    } else if (state.isFlipped) { 
+                        card.style.zIndex = state.originalZIndex + numCardsTotal;
+                    } else { 
+                        card.style.zIndex = state.originalZIndex;
+                    }
+                }
+                 // If not selected, ensure its direct transform is cleared
+                if (!card.classList.contains('selected')) {
+                    card.style.transform = '';
                 }
             });
+        }
 
-            // Bước 2: Mở thẻ vừa được click
-            if (!clickedState.isFlipped) {
-                 const randomImageIndex = Math.floor(Math.random() * frontImagePaths.length);
-                 clickedState.currentFrontImage = frontImagePaths[randomImageIndex];
-                 clickedCardElement.querySelector('.card-front img').src = clickedState.currentFrontImage;
-                 clickedCardElement.classList.add('flipped'); // Lật thẻ nếu nó chưa lật
-                 clickedState.isFlipped = true;
-            }
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                // If a popup is open during resize, close it first to avoid layout conflicts
+                if (popupOverlay.classList.contains('visible')) {
+                    hideImagePopup(); // This will reset the card
+                }
+                layoutCards();
+                // After layout, if a card was meant to be selected (e.g., if app state dictated one should be),
+                // it would need to be re-selected. However, the current resize logic in original code
+                // re-triggers handleCardClick for selected cards.
+                // The current version will close the popup and reset layout.
+                // Re-selecting and re-showing popup on resize can be added if desired.
+                 // Original logic for re-applying selected state's transform:
+                cardStates.forEach(state => {
+                    if (state.element.classList.contains('selected')) {
+                        // Re-triggering handleCardClick might be too much if it tries to re-open popup.
+                        // For now, ensure the selected card still has its 'selected' transform after layout.
+                        // Or, more simply, the user will have to click again if they want the popup after resize.
+                        // Let's stick to closing popup on resize and letting layoutCards fix positions.
+                        // The original logic was: handleCardClick(parseInt(state.element.dataset.index));
+                        // This would re-open the popup if it was closed by hideImagePopup().
+                        // Let's refine this: just ensure the selected card's transform is reapplied without popup.
+                        
+                        // Simpler: if a card was selected, and popup closed due to resize, it remains 'selected' visually
+                        // in the fan (due to its class). layoutCards() will reposition it.
+                        // If we want to restore the "selected" specific transform (scale, etc) without popup:
+                        const cardElement = state.element;
+                        const isMobile = window.innerWidth <= 768;
+                        if (cardElement.classList.contains('selected')) { // Check again, as hideImagePopup might have unselected it
+                           if (isMobile) {
+                                cardElement.style.transform = `scale(1.05)`;
+                            } else {
+                                cardElement.style.transform = `
+                                    translateX(${state.originalTranslateX}px)
+                                    translateY(${state.originalTranslateY - 20}px) 
+                                    rotateZ(${state.originalRotateZ}deg)
+                                    rotateX(${state.originalRotateX}deg)
+                                    scale(1.1)
+                                `;
+                            }
+                        }
 
-            clickedCardElement.classList.add('selected'); // Chọn thẻ
-            highestZIndex++; // Luôn tăng để đảm bảo thẻ mới nhất ở trên
-            clickedCardElement.style.zIndex = highestZIndex;
-
-            if (isMobile) {
-                // Trên mobile, đưa thẻ đã chọn lên giữa và phóng to nhẹ
-                const cardAreaRect = cardArea.getBoundingClientRect();
-                const clickedCardRect = clickedCardElement.getBoundingClientRect();
-
-                // currentXRelativeToArea = Vị trí X của thẻ trong cardArea (trừ đi paddingLeft của cardArea)
-                // Phải lấy getBoundingClientRect().left của thẻ đầu tiên để có điểm tham chiếu cho flex item
-                const firstCardRect = cardStates[0].element.getBoundingClientRect();
-                const currentXRelativeToFirstCard = clickedCardRect.left - firstCardRect.left;
-
-                // Tính tổng chiều rộng các thẻ đã được layout (nhóm flex item)
-                let totalGroupWidth = 0;
-                cards.forEach((card, i) => {
-                    totalGroupWidth += parseFloat(getComputedStyle(card).width);
-                    if (i < numCardsActual - 1) { // Chỉ cộng margin-right cho các thẻ không phải thẻ cuối
-                        totalGroupWidth += parseFloat(getComputedStyle(card).marginRight);
                     }
                 });
 
 
-                // Vị trí tâm của nhóm thẻ trong cardArea
-                const groupCenterInArea = (cardAreaRect.width / 2); // Tính từ mép trái của cardAreaRect
-                
-                // Vị trí tâm của thẻ được click trong cardArea
-                const clickedCardCenterInArea = (clickedCardRect.left - cardAreaRect.left) + (clickedCardRect.width / 2);
-
-                // Dịch chuyển cần thiết để tâm của thẻ được click trùng với tâm của nhóm thẻ (đang được justify-content: center)
-                const translateXToCenter = groupCenterInArea - clickedCardCenterInArea;
-
-                clickedCardElement.style.transform = `translateX(${translateXToCenter}px) scale(1.05)`;
-            }
-        }
-    }
-
-    function layoutCards() {
-        const cards = Array.from(cardArea.querySelectorAll('.card'));
-        const viewportWidth = window.innerWidth;
-        const numCardsActual = cards.length;
-
-        if (numCardsActual === 0) return;
-
-        const cardElementForSize = cards[0];
-        const cardComputedStyle = getComputedStyle(cardElementForSize);
-        const cardWidth = parseFloat(cardComputedStyle.width); // 120px
-
-        // Lấy padding ngang của cardArea
-        const cardAreaStyle = getComputedStyle(cardArea);
-        const cardAreaPaddingLeft = parseFloat(cardAreaStyle.paddingLeft);
-        const cardAreaPaddingRight = parseFloat(cardAreaStyle.paddingRight);
-
-
-        cards.forEach((card, i_dom) => {
-            const cardDatasetIndex = parseInt(card.dataset.index);
-            const state = cardStates[cardDatasetIndex];
-
-            // Reset style cơ bản có thể bị ảnh hưởng bởi JS từ breakpoint khác
-            card.style.transform = ''; // Luôn reset transform
-            card.style.left = ''; // Clear left
-            card.style.marginLeft = ''; // Clear margins
-            card.style.marginRight = ''; // Clear margins
-            card.style.position = 'relative'; // Đảm bảo là relative cho mobile
-
-            if (viewportWidth <= 768) { // Mobile
-                cardArea.style.display = 'flex'; // Đảm bảo là flex
-
-                // `availableWidthForCards` là chiều rộng *thực sự có thể sử dụng* cho các card bên trong padding của cardArea
-                const availableWidthForCards = cardArea.clientWidth; // clientWidth đã bao gồm padding
-
-                // `mobileVisualBuffer` là khoảng trống mà chúng ta muốn đảm bảo còn lại ở 2 bên
-                const mobileVisualBuffer = 20; // Ví dụ: 20px mỗi bên, tổng 40px
-                const effectiveWidthForCardsLayout = availableWidthForCards - (mobileVisualBuffer * 2);
-
-                let totalWidthOccupiedByCards = numCardsActual * cardWidth;
-                let spacingOrOverlapPerCard = 0;
-
-                if (totalWidthOccupiedByCards > effectiveWidthForCardsLayout) {
-                    // Cần chồng lấp
-                    // Tính toán phần nhìn thấy của mỗi thẻ để tổng chiều rộng vừa với `effectiveWidthForCardsLayout`
-                    const totalVisibleWidthRequired = effectiveWidthForCardsLayout;
-                    
-                    spacingOrOverlapPerCard = (totalVisibleWidthRequired - cardWidth) / (numCardsActual > 1 ? numCardsActual - 1 : 1);
-                    
-                    // Đảm bảo mỗi thẻ vẫn lộ ra ít nhất một phần nhìn thấy được
-                    const minVisiblePart = 20; // 20px
-                    if (spacingOrOverlapPerCard < minVisiblePart) {
-                        spacingOrOverlapPerCard = minVisiblePart;
-                    }
-
-                    const marginRightValue = spacingOrOverlapPerCard - cardWidth; // Đây sẽ là giá trị âm
-                    
-                    if (i_dom < numCardsActual - 1) { // Áp dụng margin-right cho tất cả trừ thẻ cuối cùng
-                        card.style.marginRight = `${marginRightValue}px`;
-                    } else {
-                        card.style.marginRight = '0';
-                    }
-
-                } else {
-                    // Thẻ vừa hoặc còn thừa chỗ, phân bổ khoảng trống đều giữa các thẻ
-                    const remainingSpace = effectiveWidthForCardsLayout - totalWidthOccupiedByCards;
-                    const spaceBetweenCards = (numCardsActual > 1 ? remainingSpace / (numCardsActual - 1) : 0);
-                    
-                    if (i_dom < numCardsActual - 1) {
-                        card.style.marginRight = `${spaceBetweenCards}px`;
-                    } else {
-                        card.style.marginRight = '0';
-                    }
-                }
-                
-                // Z-index cơ bản cho mobile là thứ tự DOM
-                state.originalZIndex = i_dom;
-
-                // Xử lý z-index và transform cho mobile
-                if (card.classList.contains('selected')) {
-                    // transform được handleCardClick xử lý
-                    // Z-index đã được handleCardClick đặt
-                } else if (state.isFlipped) { // Thẻ lật nhưng không được chọn
-                    card.style.zIndex = state.originalZIndex + numCardsTotal;
-                    card.style.transform = ''; // Đảm bảo không có transform thừa
-                } else { // Thẻ úp và không được chọn
-                    card.style.zIndex = state.originalZIndex;
-                    card.style.transform = ''; // Đảm bảo không có transform thừa
-                }
-
-            } else { // Desktop and Tablet - Fanned layout
-                cardArea.style.display = 'flex'; // Đảm bảo là flex
-                card.style.position = 'absolute'; // Đặt absolute cho desktop/tablet
-
-                const isTablet = viewportWidth <= 1024;
-                const totalFanAngle = isTablet ? 40 : 55;
-                const cardHorizontalSpreadFactor = isTablet ? 0.33 : 0.30;
-                const horizontalSpreadPx = cardWidth * cardHorizontalSpreadFactor;
-                const fanBaseVerticalOffset = isTablet ? 5 : 10;
-                const arcDepth = isTablet ? 15 : 25;
-                const cardTiltX = -8;
-
-                card.style.transformOrigin = 'center 85%';
-
-                const anglePerCard = numCardsActual > 1 ? totalFanAngle / (numCardsActual - 1) : 0;
-                const rotationZ = (i_dom - (numCardsActual - 1) / 2) * anglePerCard;
-                const horizontalOffset = (i_dom - (numCardsActual - 1) / 2) * horizontalSpreadPx;
-
-                const centerIndex = (numCardsActual - 1) / 2;
-                let normalizedPosFactor = 0;
-                if (numCardsActual > 1) {
-                     normalizedPosFactor = centerIndex !== 0 ? (i_dom - centerIndex) / centerIndex : (i_dom === 0 ? -1 : 1);
-                }
-                const arcYComponent = arcDepth * Math.pow(normalizedPosFactor, 2);
-                const finalTranslateY = fanBaseVerticalOffset + arcYComponent;
-
-                card.style.transform = `
-                    translateX(${horizontalOffset}px)
-                    translateY(${finalTranslateY}px)
-                    rotateZ(${rotationZ}deg)
-                    rotateX(${cardTiltX}deg)
-                `;
-
-                const distanceFromCenterVisual = Math.abs(i_dom - centerIndex);
-                const zLayerInFan = numCardsActual - Math.ceil(distanceFromCenterVisual);
-                state.originalZIndex = zLayerInFan;
-
-                // Xử lý z-index cho desktop/tablet
-                if (card.classList.contains('selected')) {
-                    // z-index đã được handleCardClick đặt là highestZIndex
-                } else if (state.isFlipped) { // Thẻ lật nhưng không được chọn
-                    card.style.zIndex = state.originalZIndex + numCardsTotal;
-                } else { // Thẻ úp và không được chọn
-                    card.style.zIndex = state.originalZIndex;
-                }
-            }
+            }, 100);
         });
-    }
 
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            layoutCards();
-        }, 100);
+        createCards();
     });
-
-    createCards();
-});
     </script>
 </body>
 </html>
