@@ -15,12 +15,6 @@
     body {
     margin: 0;
     background: #18332b;
-     background-image:
-    url('stars-layer.png'),
-    url('clouds-layer.png');
-  background-repeat: no-repeat, no-repeat;
-  background-size: cover, cover;
-  background-position: center, top;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
@@ -29,13 +23,72 @@
     overflow-x: hidden; /* Ngăn cuộn ngang toàn trang */
     overflow-y: hidden
 }
+.frame.corner.top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30vh; /* chỉnh theo kích thước ảnh thật */
+  height: 30vh;
+  background-color: #18332b;
+  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+  pointer-events: none; /* để không cản trở click vào nội dung chính */
+}
 
+.frame.corner.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
+  height: 30vh;
+  background-color: #18332b;
+  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+  transform: scaleX(-1); /* lật ảnh để đối xứng với top-left */
+  pointer-events: none;
+}
+.frame.corner.bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
+  height: 30vh;
+  background-color: #18332b;
+  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+  transform: scaleY(-1); /* lật ảnh để đối xứng với top-left */
+  pointer-events: none;
+  
+}
+
+.frame.corner.bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
+  height: 30vh;
+  background-color: #18332b;
+  background-image: url('https://i.postimg.cc/DyCqKps2/corner-frame.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+  transform: scaleX(-1) scaleY(-1);/* lật ảnh để đối xứng với top-left */
+  pointer-events: none;
+  
+}
 .container {
     text-align: center;
     width: 100%;
     max-width: 1200px;
     padding: 20px;
     box-sizing: border-box;
+     z-index: 2;
 }
 
 header h1 {
@@ -44,6 +97,7 @@ header h1 {
     font-weight: 400;
     margin-bottom: 10px;
     color: #e7edad;
+   
 }
 
 header p {
@@ -169,16 +223,20 @@ header p {
     </style>
 </head>
 <body>
+<div class="frame corner top-left"></div>
+<div class="frame corner top-right"></div>
     <div class="container">
         <header>
             <h1>Chọn một lá bài</h1>
             <p>Đón nhận thông điệp Năm Mới từ Bé Sáng</p>
         </header>
+        
         <div class="card-area">
             <!-- Các lá bài sẽ được tạo bởi JavaScript -->
         </div>
     </div>
-
+<div class="frame corner bottom-left"></div>
+<div class="frame corner bottom-right"></div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
     const cardArea = document.querySelector('.card-area');
