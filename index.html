@@ -200,8 +200,11 @@
     }
 
     @media (max-width: 768px) {
+        header h1 {
+            font-size: 24px;
+        }
         header p {
-            font-size: 0.9em;
+            font-size: 16px;
             margin-bottom: 20px;
         }
         .card-area {
@@ -531,7 +534,7 @@
                     if (totalWidthOccupiedByCards > effectiveWidthForCardsLayout) {
                         const totalVisibleWidthRequired = effectiveWidthForCardsLayout;
                         spacingOrOverlapPerCard = (totalVisibleWidthRequired - cardWidth) / (numCardsActual > 1 ? numCardsActual - 1 : 1);
-                        const minVisiblePart = 20; 
+                        const minVisiblePart = 10; 
                         if (spacingOrOverlapPerCard < minVisiblePart) {
                             spacingOrOverlapPerCard = minVisiblePart;
                         }
