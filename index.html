@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chọn một lá bài</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&display=swap" rel="stylesheet">
     <style>
+    html, body {
+    height: 100%; /* Đảm bảo html và body chiếm toàn bộ chiều cao màn hình */
+    margin: 0;
+}
     body {
     margin: 0;
-    background-color: #ffffff;
-    color: #ffffff;
+    background: #18332b;
+     background-image:
+    url('stars-layer.png'),
+    url('clouds-layer.png');
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-position: center, top;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     padding-top: 20px;
     overflow-x: hidden; /* Ngăn cuộn ngang toàn trang */
     overflow-y: hidden
@@ -28,16 +39,17 @@
 }
 
 header h1 {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 3.6em;
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
     margin-bottom: 10px;
-    color: #04aa6d;
+    color: #e7edad;
 }
 
 header p {
-    font-size: 1em;
+    font-size: 1.25em;
     margin-bottom: 40px;
-    color: #04aa6d;
+    color: #e7edad;
 }
 
 .card-area {
@@ -159,8 +171,8 @@ header p {
 <body>
     <div class="container">
         <header>
-            <h1>CHỌN MỘT LÁ BÀI</h1>
-            <p>Tương lai nào đang chờ đợi bạn? Đón nhận thông điệp Năm Mới từ Bé Sáng</p>
+            <h1>Chọn một lá bài</h1>
+            <p>Đón nhận thông điệp Năm Mới từ Bé Sáng</p>
         </header>
         <div class="card-area">
             <!-- Các lá bài sẽ được tạo bởi JavaScript -->
