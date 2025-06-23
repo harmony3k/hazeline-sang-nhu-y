@@ -35,7 +35,8 @@
     }
     body {
         margin: 0;
-        background: #18332b;
+        background: url('https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/refs/heads/main/background-hzl.png') no-repeat center center fixed;
+    background-size: cover;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         display: flex;
         flex-direction: column;
@@ -49,9 +50,8 @@
       top: 0;
       left: 0;
       width: 30vh; /* chỉnh theo kích thước ảnh thật */
-      height: 30vh;
-      background-color: #18332b;
-      background-image: url('https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/40ff539a55321e050373e7c910885500a3d5e3de/asset%20img/line%20corner.svg');
+      height: 100vh;
+      background-image: url('https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/9a780e8ed2c612efd9da6eabc415f7cacdfbe63f/asset%20img/BORDER.svg');
       background-size: contain;
       background-repeat: no-repeat;
       pointer-events: none; /* để không cản trở click vào nội dung chính */
@@ -62,43 +62,14 @@
       top: 0;
       right: 0;
       width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
-      height: 30vh;
-      background-color: #18332b;
-      background-image: url('https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/40ff539a55321e050373e7c910885500a3d5e3de/asset%20img/line%20corner.svg');
+      height: 100vh;
+      background-image: url('https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/9a780e8ed2c612efd9da6eabc415f7cacdfbe63f/asset%20img/BORDER.svg');
       background-size: contain;
       background-repeat: no-repeat;    
       transform: scaleX(-1); /* lật ảnh để đối xứng với top-left */
       pointer-events: none;
     }
-    .frame.corner.bottom-left {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
-      height: 30vh;
-      background-color: #18332b;
-      background-image: url('https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/40ff539a55321e050373e7c910885500a3d5e3de/asset%20img/line%20corner.svg');
-      background-size: contain;
-      background-repeat: no-repeat;    
-      transform: scaleY(-1); /* lật ảnh để đối xứng với top-left */
-      pointer-events: none;
-      
-    }
-
-    .frame.corner.bottom-right {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 30vh; /* hoặc tùy theo kích thước thật của ảnh */
-      height: 30vh;
-      background-color: #18332b;
-      background-image: url('https://raw.githubusercontent.com/harmony3k/hazeline-sang-nhu-y/40ff539a55321e050373e7c910885500a3d5e3de/asset%20img/line%20corner.svg');
-      background-size: contain;
-      background-repeat: no-repeat;
-      transform: scaleX(-1) scaleY(-1);/* lật ảnh để đối xứng với top-left */
-      pointer-events: none;
-      
-    }
+    
     .container {
         text-align: center;
         width: 100%;
